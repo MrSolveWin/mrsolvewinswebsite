@@ -13,19 +13,19 @@ alter table public.videos enable row level security;
 drop policy if exists "Anyone can read published videos" on public.videos;
 create policy "Anyone can read published videos"
 on public.videos for select to anon, authenticated
-using (published = true or auth.uid() = 'OWNER_USER_UUID'::uuid);
+using (published = true or auth.uid() = '4b33b24a-c27f-4145-8e26-c99fa1a98c5d'::uuid);
 drop policy if exists "Owner can add videos" on public.videos;
 create policy "Owner can add videos"
 on public.videos for insert to authenticated
-with check (auth.uid() = 'OWNER_USER_UUID'::uuid);
+with check (auth.uid() = '4b33b24a-c27f-4145-8e26-c99fa1a98c5d'::uuid);
 drop policy if exists "Owner can update videos" on public.videos;
 create policy "Owner can update videos"
 on public.videos for update to authenticated
-using (auth.uid() = 'OWNER_USER_UUID'::uuid)
-with check (auth.uid() = 'OWNER_USER_UUID'::uuid);
+using (auth.uid() = '4b33b24a-c27f-4145-8e26-c99fa1a98c5d'::uuid)
+with check (auth.uid() = '4b33b24a-c27f-4145-8e26-c99fa1a98c5d'::uuid);
 drop policy if exists "Owner can delete videos" on public.videos;
 create policy "Owner can delete videos"
 on public.videos for delete to authenticated
-using (auth.uid() = 'OWNER_USER_UUID'::uuid);
+using (auth.uid() = '4b33b24a-c27f-4145-8e26-c99fa1a98c5d'::uuid);
 -- Keep public sign-ups disabled in Supabase Authentication settings.
 -- Create the one owner account manually from the Supabase dashboard.
